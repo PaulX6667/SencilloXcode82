@@ -12,20 +12,20 @@ workflows:
       - name: Build unsigned .ipa
         script: |
           xcodebuild -project PrimeraApp.xcodeproj \
-          -scheme Prueba22 \
+          -scheme PrimeraApp \
           -sdk iphoneos \
           -configuration Release \
-          -archivePath $CM_BUILD_DIR/Prueba22.xcarchive \
+          -archivePath $CM_BUILD_DIR/PrimeraApp.xcarchive \
           CODE_SIGN_STYLE=Manual \
           CODE_SIGN_IDENTITY="" \
           archive
 
           xcodebuild -exportArchive \
-          -archivePath $CM_BUILD_DIR/Prueba22.xcarchive \
+          -archivePath $CM_BUILD_DIR/PrimeraApp.xcarchive \
           -exportPath $CM_BUILD_DIR/ios \
           -exportOptionsPlist ExportOptions.plist \
           -allowProvisioningUpdates
     artifacts:
       - $CM_BUILD_DIR/ios/*.ipa
-      - $CM_BUILD_DIR/Prueba22.xcarchive/Products/Applications/Prueba22.app
+      - $CM_BUILD_DIR/PrimeraApp.xcarchive/Products/Applications/PrimeraApp.app
       
