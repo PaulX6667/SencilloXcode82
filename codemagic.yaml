@@ -9,6 +9,10 @@ workflows:
         APPLE_ID: Environ(APPLE_ID)
         APPLE_PASSWORD: Environ(APPLE_ID_PASSWORD)
     scripts:
+      - name: List schemes
+        script: |
+          echo "Listing schemes for PrimeraApp.xcodeproj"
+          xcodebuild -project PrimeraApp.xcodeproj -list
       - name: Build unsigned .ipa
         script: |
           xcodebuild -project PrimeraApp.xcodeproj \
