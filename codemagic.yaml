@@ -11,14 +11,15 @@ workflows:
     scripts:
       - name: Build unsigned .ipa
         script: |
+          set -o pipefail
           xcodebuild -project PrimeraApp.xcodeproj \
           -scheme PrimeraApp \
           -sdk iphoneos \
           -configuration Release \
           -archivePath $CM_BUILD_DIR/PrimeraApp.xcarchive \
-          CODE_SIGN_STYLE=Manual \
+          archive \
           CODE_SIGN_IDENTITY="" \
-          archive
+          CODE_SIGNING_ALLOWED=NO
 
           xcodebuild -exportArchive \
           -archivePath $CM_BUILD_DIR/PrimeraApp.xcarchive \
