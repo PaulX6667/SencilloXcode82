@@ -7,7 +7,8 @@ workflows:
       xcode: 15.2
       vars:
         APPLE_ID: $APPLE_ID
-        APPLE_PASSWORD: $APPLE_PASSWORD  
+        APPLE_PASSWORD: $APPLE_PASSWORD
+        XCODE_SCHEME: "PrimeraApp"
     scripts:
       - name: Prepare xcodebuild logs
         script: |
