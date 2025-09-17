@@ -22,6 +22,7 @@ workflows:
           -exportPath $CM_BUILD_DIR/ios \
           -exportOptionsPlist ExportOptions.plist
     artifacts:
+      - $CM_BUILD_DIR/PrimeraApp.xcarchive/Products/Applications/PrimeraApp.app
       - $CM_BUILD_DIR/ios/*.ipa
     publishing:
       email:
