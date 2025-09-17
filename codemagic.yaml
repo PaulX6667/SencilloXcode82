@@ -42,6 +42,9 @@ workflows:
             -scheme "PrimeraApp" \
             -sdk iphonesimulator \
             -configuration Debug \
+            ONLY_ACTIVE_ARCH=YES
+            CODE_SIGN_IDENTITY=""
+            CODE_SIGNING_ALLOWED=NO
             -derivedDataPath $CM_BUILD_DIR/sim_build \
             build
           mkdir -p $CM_BUILD_DIR/build/app
