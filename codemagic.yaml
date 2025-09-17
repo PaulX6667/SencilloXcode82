@@ -20,12 +20,6 @@ workflows:
           archive \
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_ALLOWED=NO
-
-          xcodebuild -exportArchive \
-          -archivePath $CM_BUILD_DIR/PrimeraApp.xcarchive \
-          -exportPath $CM_BUILD_DIR/ios \
-          -exportOptionsPlist ExportOptions.plist \
-          -allowProvisioningUpdates
     artifacts:
       - $CM_BUILD_DIR/ios/*.ipa
       - $CM_BUILD_DIR/PrimeraApp.xcarchive/Products/Applications/PrimeraApp.app
