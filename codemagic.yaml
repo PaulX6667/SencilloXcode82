@@ -43,13 +43,17 @@ workflows:
             -sdk iphonesimulator \
             -configuration Debug \
             ONLY_ACTIVE_ARCH=YES
-            CODE_SIGN_IDENTITY=""
             CODE_SIGNING_ALLOWED=NO
             -derivedDataPath $CM_BUILD_DIR/sim_build \
             build
           mkdir -p $CM_BUILD_DIR/build/app
-          APP_PATH=$(find $CM_BUILD_DIR/sim_build/Build/Products/Debug-iphonesimulator -type d -name "$XCODE_SCHEME.app" | head -n 1)
+          APP_PATH=$(find $CM_BUILD_DIR/sim_build/Build/Products/Debug-iphonesimulator -maxdepth 1 -type d -name "*.app" | head -n 1)
+          if [ -z "$APP_PATH" ]; then
+            echo "❌ No se encontró la app para simulador"
+            exit 1
+          fi
           echo "✅ App para simulador generada en: $APP_PATH"
+          mkdir -p $CM_BUILD_DIR/build/app
           cp -r "$APP_PATH" $CM_BUILD_DIR/build/app/
 
     artifacts:
