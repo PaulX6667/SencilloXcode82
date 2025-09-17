@@ -7,6 +7,8 @@
   <string>development</string>
   <key>signingStyle</key>
   <string>automatic</string>
+  <key>method</key>
+  <string>development</string>
   <key>compileBitcode</key>
   <false/>
 </dict>
