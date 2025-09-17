@@ -8,6 +8,7 @@ workflows:
       vars:
         APPLE_ID: Environ(APPLE_ID)
         APPLE_PASSWORD: Environ(APPLE_ID_PASSWORD)
+        DEVELOPMENT_TEAM: ""
     scripts:
       - name: List schemes
         script: |
