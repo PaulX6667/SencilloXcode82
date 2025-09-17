@@ -11,12 +11,17 @@ workflows:
     scripts:
       - name: Build unsigned .ipa
         script: |
+          # Archive the app
           xcodebuild -project PrimeraApp.xcodeproj \
           -scheme Prueba22 \
           -sdk iphoneos \
           -configuration Release \
-          -archivePath $CM_BUILD_DIR/Prueba22.xcarchive archive
+          -archivePath $CM_BUILD_DIR/Prueba22.xcarchive \
+          CODE_SIGN_STYLE=Automatic \
+          DEVELOPMENT_TEAM="" \
+          archive
 
+          # Export .ipa with automatic signing
           xcodebuild -exportArchive \
           -archivePath $CM_BUILD_DIR/Prueba22.xcarchive \
           -exportPath $CM_BUILD_DIR/ios \
