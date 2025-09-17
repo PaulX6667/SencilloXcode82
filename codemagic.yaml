@@ -8,12 +8,7 @@ workflows:
       vars:
         APPLE_ID: Environ(APPLE_ID)
         APPLE_PASSWORD: Environ(APPLE_ID_PASSWORD)
-        DEVELOPMENT_TEAM: ""
     scripts:
-      - name: List schemes
-        script: |
-          echo "Listing schemes for PrimeraApp.xcodeproj"
-          xcodebuild -project PrimeraApp.xcodeproj -list
       - name: Build unsigned .ipa
         script: |
           xcodebuild -project PrimeraApp.xcodeproj \
@@ -27,9 +22,5 @@ workflows:
           -exportPath $CM_BUILD_DIR/ios \
           -exportOptionsPlist ExportOptions.plist
     artifacts:
-      - $CM_BUILD_DIR/PrimeraApp.xcarchive/Products/Applications/PrimeraApp.app
+      - $CM_BUILD_DIR/Prueba22.xcarchive/Products/Applications/Prueba22.app
       - $CM_BUILD_DIR/ios/*.ipa
-    publishing:
-      email:
-        recipients:
-          - mckdesarrollo@gmail.com
