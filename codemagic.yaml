@@ -6,8 +6,8 @@ workflows:
     environment:
       xcode: 15.2
       vars:
-        APPLE_ID: Environ(APPLE_ID)
-        APPLE_PASSWORD: Environ(APPLE_ID_PASSWORD)
+        APPLE_ID: $APPLE_ID
+        APPLE_PASSWORD: $APPLE_PASSWORD  
     scripts:
       - name: Build unsigned .ipa
         script: |
@@ -18,7 +18,6 @@ workflows:
           -configuration Release \
           -archivePath $CM_BUILD_DIR/Prueba22.xcarchive \
           CODE_SIGN_STYLE=Automatic \
-          DEVELOPMENT_TEAM="" \
           archive
 
           # Export .ipa with automatic signing
@@ -27,5 +26,6 @@ workflows:
           -exportPath $CM_BUILD_DIR/ios \
           -exportOptionsPlist ExportOptions.plist
     artifacts:
-      - $CM_BUILD_DIR/Prueba22.xcarchive/Products/Applications/Prueba22.app
       - $CM_BUILD_DIR/ios/*.ipa
+      - $CM_BUILD_DIR/Prueba22.xcarchive/Products/Applications/Prueba22.app
+      
