@@ -9,18 +9,46 @@ workflows:
         APPLE_ID: $APPLE_ID
         APPLE_PASSWORD: $APPLE_PASSWORD  
     scripts:
-      - name: Build unsigned .ipa
+      - name: Prepare xcodebuild logs
+        script: |
+          mkdir -p /tmp/xcodebuild_logs
+
+      # --- Build IPA unsigned ---
+      - name: Build and archive (iPhoneOS unsigned IPA)
         script: |
           set -o pipefail
-          xcodebuild -project PrimeraApp.xcodeproj \
-          -scheme PrimeraApp \
-          -sdk iphoneos \
-          -configuration Release \
-          -archivePath $CM_BUILD_DIR/PrimeraApp.xcarchive \
-          archive \
-          CODE_SIGN_IDENTITY="" \
-          CODE_SIGNING_ALLOWED=NO
+          xcodebuild -workspace "$XCODE_WORKSPACE" \
+            -scheme "$XCODE_SCHEME" \
+            -configuration Release \
+            -archivePath $CM_BUILD_DIR/build/${XCODE_SCHEME}.xcarchive \
+            archive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_ALLOWED=NO
+      - name: Package unsigned IPA
+        script: |
+          mkdir -p $CM_BUILD_DIR/build/ipa
+          cd $CM_BUILD_DIR/build/${XCODE_SCHEME}.xcarchive/Products/Applications
+          mkdir Payload
+          cp -r $XCODE_SCHEME.app Payload/
+          zip -r9 $CM_BUILD_DIR/build/ipa/${XCODE_SCHEME}-unsigned.ipa Payload
+
+      # --- Build Simulator APP ---
+      - name: Build for Simulator (App Preview)
+        script: |
+          set -o pipefail
+          xcodebuild \
+            -workspace "$XCODE_WORKSPACE" \
+            -scheme "$XCODE_SCHEME" \
+            -sdk iphonesimulator \
+            -configuration Debug \
+            -derivedDataPath $CM_BUILD_DIR/sim_build \
+            build
+          mkdir -p $CM_BUILD_DIR/build/app
+          APP_PATH=$(find $CM_BUILD_DIR/sim_build/Build/Products/Debug-iphonesimulator -type d -name "$XCODE_SCHEME.app" | head -n 1)
+          echo "✅ App para simulador generada en: $APP_PATH"
+          cp -r "$APP_PATH" $CM_BUILD_DIR/build/app/
+
     artifacts:
-      - $CM_BUILD_DIR/ios/*.ipa
-      - $CM_BUILD_DIR/PrimeraApp.xcarchive/Products/Applications/PrimeraApp.app
+      - $CM_BUILD_DIR/build/ipa/*.ipa   # IPA unsigned
+      - $CM_BUILD_DIR/build/app/*.app   # APP para Preview
       
