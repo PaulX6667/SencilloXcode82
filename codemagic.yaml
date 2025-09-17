@@ -54,7 +54,7 @@ workflows:
           fi
           echo "✅ App para simulador generada en: $APP_PATH"
           mkdir -p $CM_BUILD_DIR/build/app
-          cp -r "$APP_PATH" $CM_BUILD_DIR/build/app/
+          cp -r "$APP_PATH" $CM_BUILD_DIR/build/app/*.app
 
     artifacts:
       - $CM_BUILD_DIR/build/ipa/*.ipa   # IPA unsigned
