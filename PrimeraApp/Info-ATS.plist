@@ -1,0 +1,6 @@
+<!-- Add this to Info.plist if you have issues loading remote HLS streams -->
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+</dict>
