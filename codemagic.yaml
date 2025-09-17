@@ -46,17 +46,17 @@ workflows:
             CODE_SIGNING_ALLOWED=NO \
             -derivedDataPath $CM_BUILD_DIR/sim_build \
             build
-          mkdir -p $CM_BUILD_DIR/build/app
+          # Crear carpeta para Stellar
+          mkdir -p $CM_BUILD_DIR/build/app_preview
           APP_PATH=$(find $CM_BUILD_DIR/sim_build/Build/Products/Debug-iphonesimulator -maxdepth 1 -type d -name "*.app" | head -n 1)
           if [ -z "$APP_PATH" ]; then
             echo "❌ No se encontró la app para simulador"
             exit 1
           fi
           echo "✅ App para simulador generada en: $APP_PATH"
-          mkdir -p $CM_BUILD_DIR/build/app
-          cp -r "$APP_PATH" $CM_BUILD_DIR/build/app/*.app
+          cp -R "$APP_PATH" $CM_BUILD_DIR/build/app_preview/PrimeraApp.app
 
     artifacts:
       - $CM_BUILD_DIR/build/ipa/*.ipa   # IPA unsigned
-      - $CM_BUILD_DIR/build/app/*.app   # APP para Preview
+      - $CM_BUILD_DIR/build/app_preview/*.app
       
