@@ -128,7 +128,7 @@ class ViewController: UIViewController {
         player = AVPlayer(url: url)
         playerLayer = AVPlayerLayer(player: player)
         // CORRECCIÓN: Usar sintaxis completa para Swift 3
-        playerLayer?.videoGravity = AVLayerVideoGravityResizeAspect
+        playerLayer?.videoGravity = .resizeAspect
         playerLayer?.frame = videoContainer.bounds
         if let pl = playerLayer {
             videoContainer.layer.addSublayer(pl)
@@ -184,7 +184,7 @@ class ViewController: UIViewController {
             playerLayer = AVPlayerLayer(player: player)
             playerLayer?.frame = videoContainer.bounds
             // CORRECCIÓN: Usar sintaxis completa para Swift 3
-            playerLayer?.videoGravity = AVLayerVideoGravityResizeAspect
+            playerLayer?.videoGravity = .resizeAspect
             if let pl = playerLayer {
                 videoContainer.layer.addSublayer(pl)
             }
@@ -213,7 +213,7 @@ class ViewController: UIViewController {
         pl.removeFromSuperlayer()
         pl.frame = vc.view.bounds
         // CORRECCIÓN: Usar sintaxis completa para Swift 3
-        pl.videoGravity = AVLayerVideoGravityResizeAspect
+        pl.videoGravity = .resizeAspect
         vc.view.layer.addSublayer(pl)
         // Add a close button
         let close = UIButton(frame: CGRect(x: 20, y: 30, width: 60, height: 30))
