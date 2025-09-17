@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         let titles = ["EN VIVO LA PAZ", "EN VIVO SANTA CRUZ", "RQP EN VIVO", "REDES DIGITALES"]
         for (b, t) in zip(buttons, titles) {
             b.setTitle(t, for: .normal)
-            b.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightSemibold)
+            b.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
             b.layer.cornerRadius = 6
             b.layer.borderWidth = 1
             b.layer.borderColor = UIColor.lightGray.cgColor
